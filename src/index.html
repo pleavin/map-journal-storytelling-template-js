@@ -78,6 +78,8 @@
 			.sectionPanel .title, .sectionPanel .appTitle, #mobileView .title{
 				font-family: 'Niconne', cursive;
 			}
+
+/*
 			.sectionPanel .content, #mobileView .content{
 				font-family: 'PT Sans', sans-serif;
 				line-height: 110%;
@@ -89,6 +91,7 @@
 				line-height: 110%;
 				font-size: 100%;
 			}
+*/
 
 			/* Use as accent for map actions */
 			.btn-orange {
@@ -139,7 +142,7 @@
 					<!-- Text panel of the Side Panel layout -->
 					<td id="sidePanel">
 						<div id="sidePanelInner" class="mainViewSideMap sidePanel sectionPanel">
-							<div class="navDots vertical">
+							<div class="hide navDots vertical">
 								<!-- navigation dots -->
 							</div>
 							<div class="header" aria-hidden="true">
@@ -196,7 +199,9 @@
 					<!-- Map -->
 					<td id="mainStagePanel">
 						<!-- NEW: guide for users -->
-						<div id="guidePanel"><p>Hello World<br>Is this bumping<br>everything?</p></div>
+						<div id="guidePanel">
+							<p>Hello World<br>Is this bumping<br>everything?</p>
+						</div>
 
 						<div id="mainStagePanelInner">
 
