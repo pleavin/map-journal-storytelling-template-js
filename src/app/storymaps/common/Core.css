@@ -4,6 +4,11 @@ html, body {
 	margin: auto;
 }
 
+/*
+2016/02/09
+Changed the fonts, but kept the font-family name the same.
+*/
+
 @font-face {
 	font-family: 'open_sansregular';
 	src: url('_resources/font/PT_Sans-Web-Regular.ttf');
