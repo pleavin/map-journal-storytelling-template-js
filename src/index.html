@@ -91,7 +91,7 @@
 			}
 
 			/* Use as accent for map actions */
-			.btn-orange- {
+			.btn-orange {
 			    display: inline-block;
 			    font-size: 120%;
 			    background-color: #f0ad4e;
@@ -128,6 +128,9 @@
 
 		<!-- Builder top panel is injected here -->
 		<div id="builderPanel" class="hide mainViewAboveMap"></div>
+
+		<!-- Vic come back here to inject a whole new head of page bar. Use this to colour match the navdots? -->
+
 
 		<!-- Content -->
 		<div id="contentPanel" class="mobileView">
@@ -192,7 +195,11 @@
 					</td>
 					<!-- Map -->
 					<td id="mainStagePanel">
+						<!-- NEW: guide for users -->
+						<div id="guidePanel"><p>Hello World<br>Is this bumping<br>everything?</p></div>
+
 						<div id="mainStagePanelInner">
+
 							<div class="medias">
 								<!-- Maps and media injected here -->
 							</div>
@@ -395,55 +402,6 @@ require(["dojo/topic"], function(topic) {
 		/*
 		 * Custom Javascript to be executed when the application is ready goes here
 		 */
-	});
-
-	/*
-	 * Set up a click handler on the feature of the map to navigate the story
-	 */
-
-	//
-	// *************************************
-	// Configure the webmap id and layer id
-	// *************************************
-	//
-	// First find the webmap id through the URL when you open the map in Map Viewer
-	// To get the layer id, paste the webmap id below and open the application,
-	//   then open the developer console, all the layers ids will be listed,
-	//   find the correct one and paste it below
-	// After this setup, clicking the 3rd feature of your layer, will navigate to the third entry
-	//
-	var WEBMAP_ID = "7f7ccf81cb014d50a35a77891b9d362d",
-		LAYER_ID = "csv_1264_0";
-
-	var clickHandlerIsSetup = false;
-
-	topic.subscribe("story-loaded-map", function(result){
-		if ( result.id == WEBMAP_ID && ! clickHandlerIsSetup ) {
-			var map = app.maps[result.id].response.map,
-				layer = map.getLayer(LAYER_ID);
-
-			console.log(map.graphicsLayerIds);
-
-			if ( layer ) {
-				layer.on("mouse-over", function(e){
-					map.setMapCursor("pointer");
-					map.infoWindow.setContent("<b>"+e.graphic.attributes.name.split(",")[0]+"</b><br/><i>Click to zoom</i>");
-					map.infoWindow.show(e.graphic.geometry);
-				});
-
-				layer.on("mouse-out", function(e){
-					map.setMapCursor("default");
-					map.infoWindow.hide();
-				});
-
-				layer.on("click", function(e){
-					var index = e.graphic.attributes["__OBJECTID"];
-					topic.publish("story-navigate-section", index);
-				});
-			}
-
-			clickHandlerIsSetup = true;
-		}
 	});
 });
 </script>

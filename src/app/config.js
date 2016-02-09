@@ -7,7 +7,7 @@ app.cfg = {
 	MAX_NB_SECTIONS: 101,
 
 	// Side and Floating panel dot navigation group size
-	DOTNAV_GROUPSIZE: 15,
+	DOTNAV_GROUPSIZE: 10,
 
 	TIMEOUT_VIEWER_LOAD: 5000,
 	TIMEOUT_VIEWER_REQUEST: 12000,
@@ -19,10 +19,10 @@ app.cfg = {
 	// If disabled author won't be able to activate them
 	// if disabled after a journal has been created, this will override the settings
 	HEADER_SOCIAL: {
-		facebook: true,
-		twitter: true,
+		facebook: false,
+		twitter: false,
 		bitly: {
-			enable: true,
+			enable: false,
 			login: "esristorymaps",
 			key: "R_14fc9f92e48f7c78c21db32bd01f7014"
 		}
@@ -37,7 +37,7 @@ app.cfg = {
 		{
 			id: "side",
 			thumbnail: "resources/tpl/builder/icons/builder-layout-side.png",
-			liveApp: "http://links.esri.com/storymaps/map_journal_example_side_panel",
+			//liveApp: "http://links.esri.com/storymaps/map_journal_example_side_panel",
 			sizes: { small: '30%', medium: '40%', large: '50%' },
 			positions: ["left", "right"],
 			themes: [
@@ -52,7 +52,7 @@ app.cfg = {
 		{
 			id: "float",
 			thumbnail: "resources/tpl/builder/icons/builder-layout-float.png",
-			liveApp: "http://links.esri.com/storymaps/map_journal_example_floating_panel",
+			//liveApp: "http://links.esri.com/storymaps/map_journal_example_floating_panel",
 			sizes: { small: '25%', medium: '35%', large: '45%' },
 			positions: ["right", "left"],
 			themes: [
@@ -117,10 +117,10 @@ app.cfg = {
 	//
 
 	// Text to be used as the browser page title during app creation
-	TPL_NAME: "Map Journal",
-	TPL_ID: "mapjournal",
+	TPL_NAME: "Web-based State of the Watershed",
+	TPL_ID: "wsowmapjournal",
 	WEBAPP_TAG: ["Story Map", "Map Journal"],
-	WEBAPP_KEYWORD_GENERIC: ["JavaScript", "Map", "Mapping Site", "Online Map", "Ready To Use", "selfConfigured", "Web Map"],
+	WEBAPP_KEYWORD_GENERIC: ["JavaScript", "Map", "Mapping Site", "Online Map", "Watershed"],
 	WEBAPP_KEYWORD_APP: ["Story Map", "Story Maps", "MapJournal"],
 
 	//
