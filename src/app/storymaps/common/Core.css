@@ -4,24 +4,21 @@ html, body {
 	margin: auto;
 }
 
+/*
+2016/02/09
+Changed the fonts, but kept the font-family name the same.
+*/
+
 @font-face {
 	font-family: 'open_sansregular';
-	src: url('_resources/font/OpenSans-Regular-webfont.eot');
-	src: url('_resources/font/OpenSans-Regular-webfont.eot?#iefix') format('embedded-opentype'),
-		url('_resources/font/OpenSans-Regular-webfont.woff') format('woff'),
-		url('_resources/font/OpenSans-Regular-webfont.ttf') format('truetype'),
-		url('_resources/font/OpenSans-Regular-webfont.svg#open_sansregular') format('svg');
+	src: url('_resources/font/PT_Sans-Web-Regular.ttf');
 	font-weight: normal;
 	font-style: normal;
 }
 
 @font-face {
 	font-family: 'open_sanssemibold';
-	src: url('_resources/font/OpenSans-Semibold-webfont.eot');
-	src: url('_resources/font/OpenSans-Semibold-webfont.eot?#iefix') format('embedded-opentype'),
-		url('_resources/font/OpenSans-Semibold-webfont.woff') format('woff'),
-		url('_resources/font/OpenSans-Semibold-webfont.ttf') format('truetype'),
-		url('_resources/font/OpenSans-Semibold-webfont.svg#open_sanssemibold') format('svg');
+	src: url('_resources/font/PT_Sans-Web-Bold.ttf');
 	font-weight: normal;
 	font-style: normal;
 }
@@ -107,7 +104,7 @@ a:hover{
 
 .esriSignInDialog {
 	z-index: 2000  !important;
-} 
+}
 
 /*
  * Error box
@@ -181,9 +178,9 @@ a:hover{
  */
 
 #my-stories-hidden-container {
-	position: absolute; 
-	bottom: -800px; 
-	left: 0; 
+	position: absolute;
+	bottom: -800px;
+	left: 0;
 	visibility: hidden;
 }
 
@@ -194,8 +191,8 @@ a:hover{
  	text-align: left;
 }
 
-/* something seems to go wrong during the build and this is rule from bootstrap is removed */ 
-input[type="radio"], 
+/* something seems to go wrong during the build and this is rule from bootstrap is removed */
+input[type="radio"],
 input[type="checkbox"] {
 	margin: 4px 0 0;
 }
