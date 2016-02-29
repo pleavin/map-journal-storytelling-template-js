@@ -111,6 +111,56 @@
 			    padding: 5px 15px;
 			    border-radius: 10px;
 					margin: 5px;
+				}
+
+/* squaremenu */
+
+				.navSquare {
+					display: table;
+					vertical-align: middle;
+					height: 100%;
+				}
+
+				.navSquare.vertical {
+					display: inline-block;
+					height: 100%;
+					width: 34px;
+				}
+
+				.navSquare.horizontal {
+					display: inline-block;
+					height: 100%;
+				}
+
+				/*
+				 * square
+				 */
+
+
+				/* Goldfish colours */
+
+				.navSquare .square0 {
+				    background-color: #69D2E7;
+						height: 20%;
+				}
+
+				.navSquare .square1 {
+					background-color: #A7DBD8;
+					height: 20%;
+				}
+				.navSquare .square2 {
+					background-color: #E0E4CC;
+					height: 20%;
+				}
+				.navSquare .square3 {
+					background-color: #F38630;
+					height: 20%;
+				}
+
+				.navSquare .square4 {
+					background-color: #FA6900;
+					height: 20%;
+				}
 }
 
 		</style>
@@ -128,6 +178,25 @@
 							<div class="hide navDots vertical">
 								<!-- navigation dots -->
 							</div>
+							<div class="navSquare vertical">
+									<!-- new navigation -->
+									<div class="square0">
+										<a href="#">.</a>
+									</div>
+									<div class="square1">
+										<a href="#">.</a>
+									</div>
+									<div class="square2">
+										<a href="#">.</a>
+									</div>
+									<div class="square3">
+										<a href="#">.</a>
+									</div>
+									<div class="square4">
+										<a href="#">.</a>
+									</div>
+								</div>
+
 							<div class="header" aria-hidden="true">
 								<div class="linkSocialContainer">
 									<span class="linkContainer"></span>
@@ -370,9 +439,6 @@
 
 		<script type="text/javascript" src="app/main-config.js"></script>
 		<script type="text/javascript">
-
-
-
 
 require(["dojo/topic"], function(topic) {
 	/*
