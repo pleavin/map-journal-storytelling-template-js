@@ -1,0 +1,48 @@
+/* squaremenu */
+
+	.navSquare {
+		display: table;
+		vertical-align: middle;
+		height: 100%;
+	}
+
+	.navSquare.vertical {
+		display: inline-block;
+		height: 100%;
+		width: 34px;
+	}
+
+	.navSquare.horizontal {
+		display: inline-block;
+		height: 100%;
+	}
+
+	/*
+	 * square
+	 */
+
+
+	/* Goldfish colours */
+
+	.navSquare .square0 {
+	    background-color: #69D2E7;
+			height: 20%;
+	}
+
+	.navSquare .square1 {
+		background-color: #A7DBD8;
+		height: 20%;
+	}
+	.navSquare .square2 {
+		background-color: #E0E4CC;
+		height: 20%;
+	}
+	.navSquare .square3 {
+		background-color: #F38630;
+		height: 20%;
+	}
+
+	.navSquare .square4 {
+		background-color: #FA6900;
+		height: 20%;
+	}
