@@ -33,11 +33,11 @@
 }
 
 .sidePanel .sections:focus {
-    outline: 0;    
+    outline: 0;
     border: none;
 }
 
-.sidePanel .sections::-webkit-scrollbar { 
+.sidePanel .sections::-webkit-scrollbar {
 	width: 20px;
 }
 
@@ -81,7 +81,7 @@
 	-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=99)";
 }
 
-/*.sidePanel .draft-section,*/ 
+/*.sidePanel .draft-section,*/
 .sidePanel .hidden-section {
 	padding-left: 15px;
 	border-left: 3px solid #3e78b7;
@@ -112,6 +112,35 @@ body.builder-mode .sidePanel .navDots {
 }
 
 /*
+ * Navigation Square
+ */
+
+.sidePanel .navSquare {
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	height: 100%;
+	border-right: 1px solid black;
+	/* to be over scrollbar when placed on the right */
+	z-index: 2;
+}
+
+body.builder-mode .sidePanel .navSquare {
+	/* Builder command + header height */
+	/*top: 96px;*/
+	top: 0px;
+	/* 2 * Builder command height */
+	/*padding-bottom: 90px;*/
+}
+
+
+
+
+
+
+
+/*
  * Right layout
  */
 
@@ -129,11 +158,18 @@ body.layout-side-right .sidePanel .navDots {
 	border-right: none;
 }
 
+body.layout-side-right .sidePanel .navSquare {
+	left: inherit;
+	right: 0;
+	border-left: 1px solid black;
+	border-right: none;
+}
+
 /*
  * Section style
  */
 
-.sidePanel .title {	
+.sidePanel .title {
 	/*font-family: 'open_sanssemibold', sans-serif;*/
 	/* TODO remove break compat with beta */
 	font-weight: normal;
@@ -208,10 +244,10 @@ body.layout-side-right .sidePanel .navDots {
 body.layout-side-right .sidePanel .panelEditBtn {
 	left: -20px;
 	right: inherit;
-} 
+}
 
 /* Display hidden/draft in builder */
-/*body.builder-mode .sidePanel .draft-section,*/ 
+/*body.builder-mode .sidePanel .draft-section,*/
 body.builder-mode .sidePanel .hidden-section {
 	display: block;
 }
