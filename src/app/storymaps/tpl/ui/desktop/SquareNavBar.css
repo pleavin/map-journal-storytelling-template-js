@@ -3,15 +3,15 @@
 	.navSquares {
 		display: table;
 		height: 100%;
-		position: absolute;
-		paddingLeft: 0;
-		paddingRight: 0;
 	}
 
 	.navSquares.vertical {
 		display: inline-block;
 		height: 100%;
 		width: 34px;
+		position: absolute;
+		paddingLeft: 0;
+		paddingRight: 0;
 	}
 
 	.navSquares.horizontal {
