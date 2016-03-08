@@ -2,8 +2,10 @@
 
 	.navSquare {
 		display: table;
-		vertical-align: middle;
 		height: 100%;
+		position: absolute;
+		paddingLeft: 0;
+		paddingRight: 0;
 	}
 
 	.navSquare.vertical {
@@ -18,9 +20,8 @@
 	}
 
 	/*
-	 * square
+	 * squares
 	 */
-
 
 	/* Goldfish colours */
 
@@ -45,4 +46,30 @@
 	.navSquare .square4 {
 		background-color: #FA6900;
 		height: 20%;
+	}
+
+	/*
+	 * Tooltip - reappropriated from dotNavs tooltip.
+	 */
+
+	.navSquares .tooltip {
+	  	max-width: 450px;
+	}
+
+	.navSquares .tooltip-inner {
+	    max-width: 450px; /* TODO should depend on container size 90%? */
+	    white-space: pre;
+		word-wrap: break-word;
+		text-align: left;
+		/* seems needed to make the text wraps correctly */
+		padding: 3px 7px;
+	}
+
+
+	/* On Firefox tooltip get cropped with ellipsis */
+	@-moz-document url-prefix() {
+		.navDots .tooltip-inner {
+			overflow: hidden;
+			text-overflow: ellipsis;
+		}
 	}
