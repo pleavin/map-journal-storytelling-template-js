@@ -1,6 +1,6 @@
 /* squaremenu */
 
-	.navSquare {
+	.navSquares {
 		display: table;
 		height: 100%;
 		position: absolute;
@@ -8,13 +8,13 @@
 		paddingRight: 0;
 	}
 
-	.navSquare.vertical {
+	.navSquares.vertical {
 		display: inline-block;
 		height: 100%;
 		width: 34px;
 	}
 
-	.navSquare.horizontal {
+	.navSquares.horizontal {
 		display: inline-block;
 		height: 100%;
 	}
@@ -25,28 +25,51 @@
 
 	/* Goldfish colours */
 
-	.navSquare .square0 {
+	.navSquares .square[data-index="0"] {
 	    background-color: #69D2E7;
 			height: 20%;
 	}
 
-	.navSquare .square1 {
+	.navSquares .square[data-index="1"] {
 		background-color: #A7DBD8;
 		height: 20%;
 	}
-	.navSquare .square2 {
+	.navSquares .square[data-index="2"] {
 		background-color: #E0E4CC;
 		height: 20%;
 	}
-	.navSquare .square3 {
+	.navSquares .square[data-index="3"] {
 		background-color: #F38630;
 		height: 20%;
 	}
 
-	.navSquare .square4 {
+	.navSquares .square[data-index="4"] {
 		background-color: #FA6900;
 		height: 20%;
 	}
+
+	/* Action and Events */
+
+	.navSquares .square:hover {
+		color: #FFF !important;
+	}
+
+	.navSquares .square.active {
+		color: #FFF !important;
+		font-size: 28px;
+	}
+
+	.navSquares.horizontal .square.active {
+		vertical-align: -3px;
+	}
+
+	.navSquares .square:first-child.active {
+		color: #FFF;
+		font-size: 28px;
+		background-position: 10px -16px;
+	}
+
+
 
 	/*
 	 * Tooltip - reappropriated from dotNavs tooltip.
@@ -57,8 +80,8 @@
 	}
 
 	.navSquares .tooltip-inner {
-	    max-width: 450px; /* TODO should depend on container size 90%? */
-	    white-space: pre;
+	  max-width: 450px; /* TODO should depend on container size 90%? */
+	  white-space: pre;
 		word-wrap: break-word;
 		text-align: left;
 		/* seems needed to make the text wraps correctly */
@@ -68,7 +91,7 @@
 
 	/* On Firefox tooltip get cropped with ellipsis */
 	@-moz-document url-prefix() {
-		.navDots .tooltip-inner {
+		.navSquares .tooltip-inner {
 			overflow: hidden;
 			text-overflow: ellipsis;
 		}

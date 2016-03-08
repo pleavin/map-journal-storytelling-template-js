@@ -1,7 +1,7 @@
 define(["lib-build/tpl!./SidePanelSection",
 		"lib-build/css!./SidePanel",
 		"lib-build/css!storymaps/common/builder/InlineFieldEdit",
-		"./DotNavBar",
+		"./SquareNavBar",
 		"../StoryText",
 		"storymaps/common/utils/HeaderHelper",
 		"storymaps/common/utils/CommonHelper",
@@ -11,7 +11,7 @@ define(["lib-build/tpl!./SidePanelSection",
 		viewSectionTpl,
 		viewCss,
 		inlineEditCss,
-		DotNavBar,
+		SquareNavBar,
 		StoryText,
 		HeaderHelper,
 		CommonHelper,
@@ -23,7 +23,7 @@ define(["lib-build/tpl!./SidePanelSection",
 		{
 			var _this = this,
 				_activeSectionIndex = 0,
-				_navDots = new DotNavBar(container.find('.navDots'), onDotNavigation),
+				_navSquares = new SquareNavBar(container.find('.navSquares'), onSquareNavigation),
 				_selectReady = false;
 
 			this.init = function(sections, sectionIndex, layoutOptions, headerCfg, colors)
@@ -36,10 +36,10 @@ define(["lib-build/tpl!./SidePanelSection",
 				render(sections, sectionIndex);
 				initEvents();
 
-				_navDots.init({
+				_navSquares.init({
 					sections: sections,
 					sectionIndex: sectionIndex,
-					bgColor: colors.dotNav, 
+					bgColor: colors.dotNav,
 					tooltipBgColor: colors.text,
 					tooltipFontColor: colors.panel,
 					dotColor: colors.softBtn,
@@ -53,7 +53,7 @@ define(["lib-build/tpl!./SidePanelSection",
 					}, 0);
 
 					if ( sections.length == 1 ) {
-						container.find(".navDots").hide();
+						container.find(".navSquares").hide();
 						container.find("#sidePanelInner, .scroll").css({
 							paddingLeft: 0,
 							paddingRight: 0
@@ -90,7 +90,7 @@ define(["lib-build/tpl!./SidePanelSection",
 				setLayout(layoutOptions);
 				setColor(colors);
 				setHeader(headerCfg);
-				_navDots.updateTooltipPlacement(layoutOptions.layoutCfg.position == "left" ? "right" : "left");
+				_navSquares.updateTooltipPlacement(layoutOptions.layoutCfg.position == "left" ? "right" : "left");
 			};
 
 			this.resize = function(cfg)
@@ -130,7 +130,8 @@ define(["lib-build/tpl!./SidePanelSection",
 					_selectReady = false;
 
 					container.find('.section').removeClass('active').eq(index).addClass('active');
-					_navDots.setActive(index);
+
+					_navSquares.setActive(index);
 
 					if ( ! skipScrolling ) {
 						// Start from scratch
@@ -341,7 +342,7 @@ define(["lib-build/tpl!./SidePanelSection",
 					});
 			}
 
-			function onDotNavigation(index)
+			function onSquareNavigation(index)
 			{
 				if(! _selectReady)
 					return;
@@ -494,7 +495,7 @@ define(["lib-build/tpl!./SidePanelSection",
 
 			function setColor(colors)
 			{
-				_navDots.update({
+				_navSquares.update({
 					bgColor: colors.dotNav,
 					tooltipBgColor: colors.text,
 					tooltipFontColor: colors.panel
