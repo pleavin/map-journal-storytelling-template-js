@@ -82,10 +82,13 @@ define([
 			{
 
         var squareHTML = "";
+        var menuItems =["14", "10", "5", "2", "0"];
+        var k = null;
 
 				for(var i=0; i < 5; i++){
-					var title = $("<div>" + _params.sections[i].title + "</div>").text();
-					squareHTML += '<div class="square" title="' + title + '" data-index="' + i + '">&#32;</div>';
+          k = menuItems.pop();
+					var title = $("<div>" + _params.sections[k].title + "</div>").text();
+					squareHTML += '<div class="square" title="' + title + '" data-index="' + k + '">&#32;</div>';
 				}
 
 
