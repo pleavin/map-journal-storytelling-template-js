@@ -85,11 +85,7 @@ define([
 
 				for(var i=0; i < 5; i++){
 					var title = $("<div>" + _params.sections[i].title + "</div>").text();
-
-					if ( i === 0 )
-						squareHTML += '<div class="square" title="' + title + '" data-index="0"></div>';
-					else
-						squareHTML += '<div class="square" title="' + title + '" data-index="' + i + '">&#9679;</div>';
+					squareHTML += '<div class="square" title="' + title + '" data-index="' + i + '">&#9679;</div>';
 				}
 
 
