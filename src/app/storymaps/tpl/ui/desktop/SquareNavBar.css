@@ -65,6 +65,7 @@
 
 	.navSquares .square:hover {
 		color: #FFF !important;
+
 	}
 
 	.navSquares .square.active {
@@ -86,6 +87,7 @@
 
 	/*
 	 * Tooltip - reappropriated from dotNavs tooltip.
+	 * Changed font-size.
 	 */
 
 	.navSquares .tooltip {
