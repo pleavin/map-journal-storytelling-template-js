@@ -131,7 +131,10 @@ define(["lib-build/tpl!./SidePanelSection",
 
 					container.find('.section').removeClass('active').eq(index).addClass('active');
 
+					// Blocking further re-rendering of the navSquares. 
+					if(index === 0) {
 					_navSquares.setActive(index);
+				}
 
 					if ( ! skipScrolling ) {
 						// Start from scratch
