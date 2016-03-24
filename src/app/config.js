@@ -7,7 +7,9 @@ app.cfg = {
 	MAX_NB_SECTIONS: 101,
 
 	// Side and Floating panel dot navigation group size
-	DOTNAV_GROUPSIZE: 10,
+	// Note: this has to be a size greater than the last page for the squarenav menu.
+	// e.g. if last page is "Contact us" on item 43, this variable must be 44.
+	DOTNAV_GROUPSIZE: 50,
 
 	TIMEOUT_VIEWER_LOAD: 5000,
 	TIMEOUT_VIEWER_REQUEST: 12000,

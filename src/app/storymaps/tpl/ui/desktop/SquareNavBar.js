@@ -82,7 +82,7 @@ define([
 			{
 
         var squareHTML = "";
-        var menuItems =["14", "10", "5", "2", "0"];
+        var menuItems =["28", "27", "10", "2", "0"];
         var k = null;
 
 				for(var i=0; i < 5; i++){
