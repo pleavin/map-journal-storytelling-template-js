@@ -175,8 +175,9 @@ body.layout-side-right .sidePanel .navSquares {
  * Section style
  */
 
+
 .sidePanel .title {
-	/*font-family: 'open_sanssemibold', sans-serif;*/
+	/* font-family: 'Oswald', sans-serif; */
 	/* TODO remove break compat with beta */
 	font-weight: normal;
 	font-size: 1.5em;
@@ -194,7 +195,7 @@ body.layout-side-right .sidePanel .navSquares {
 
 .sidePanel .content {
 	margin: 20px 0;
-	font-size: 1.0em;
+	font-size: 1.2em;
 }
 
 .sidePanel .section:first-child .content {

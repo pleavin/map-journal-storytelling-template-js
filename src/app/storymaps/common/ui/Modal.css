@@ -41,7 +41,7 @@
 .modal-title {
 	line-height: 1.1;
 	font-size: 1.4em;
-	font-family: 'open_sanssemibold', sans-serif;
+	font-family: 'PT_sanssemibold', sans-serif;
 	margin-top: -4px;
 	margin-left: 12px;
 	text-transform: uppercase;
@@ -57,13 +57,13 @@
     cursor: default;
 }
 
-@media screen and (max-height: 714px) {	
+@media screen and (max-height: 714px) {
 	.modal-dialog {
 		margin-top: 47px;
 	}
 }
 
-@media screen and (max-height: 630px) {	
+@media screen and (max-height: 630px) {
 	.modal-dialog {
 		margin-top: 21px;
 	}

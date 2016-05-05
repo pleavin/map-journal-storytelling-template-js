@@ -5,20 +5,26 @@ html, body {
 }
 
 /*
-2016/02/09
-Changed the fonts, but kept the font-family name the same.
+2016/05/05 - Changed font-family name of regular fonts. Added another font for Oswald for the title.
 */
 
 @font-face {
-	font-family: 'open_sansregular';
+	font-family: 'PT_sansregular';
 	src: url('_resources/font/PT_Sans-Web-Regular.ttf');
 	font-weight: normal;
 	font-style: normal;
 }
 
 @font-face {
-	font-family: 'open_sanssemibold';
+	font-family: 'PT_sanssemibold';
 	src: url('_resources/font/PT_Sans-Web-Bold.ttf');
+	font-weight: normal;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'Oswald';
+	src: url('_resources/font/OsWald-Regular.ttf');
 	font-weight: normal;
 	font-style: normal;
 }
@@ -29,7 +35,7 @@ body {
 	background-color:#E5E5E5;
 	color:#333;
 	overflow:hidden;
-	font-family: 'open_sansregular', sans-serif;
+	font-family: 'PT_sansregular', sans-serif;
 }
 
 body.mobile-view {
@@ -42,7 +48,7 @@ html, body, h1, h2, h3, h4, h5, h6, p, ul, form {
 }
 
 strong {
-	font-family: 'open_sanssemibold', sans-serif;
+	font-family: 'PT_sanssemibold', sans-serif;
 	font-weight: normal;
 }
 

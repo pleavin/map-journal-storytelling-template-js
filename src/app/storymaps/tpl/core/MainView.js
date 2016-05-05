@@ -13,7 +13,7 @@ define(["lib-build/css!./MainView",
 		"storymaps/common/mapcontrols/command/MapCommand",
 		"storymaps/common/mapcontrols/legend/Legend",
 		"storymaps/common/mapcontrols/overview/Overview",
-		
+
 		"lib-build/css!storymaps/common/_resources/font/sharing/css/fontello.css",
 		"lib-build/css!storymaps/common/utils/SocialSharing.css",
 		"lib-build/css!storymaps/common/ui/loadingIndicator/LoadingIndicator.css",
@@ -28,7 +28,7 @@ define(["lib-build/css!./MainView",
 		"lib-build/css!../ui/StoryText",
 		"lib-build/css!../ui/mobile/Common",
 		"lib-build/css!../ui/Responsive"
-	], 
+	],
 	function (
 		viewCss,
 		MainStage,
@@ -45,7 +45,7 @@ define(["lib-build/css!./MainView",
 		socialSharingIconCss,
 		socialSharingCss,
 		loadingIndicatorCss,
-		CommonHelper, 
+		CommonHelper,
 		has,
 		topic,
 		arcgisUtils,
@@ -57,14 +57,14 @@ define(["lib-build/css!./MainView",
 		 * Checkout the project repository on GitHub to access source code, latest revision, developer documentation, FAQ and tips
 		 * https://github.com/Esri/map-journal-storytelling-template-js
 		 */
-		return function MainView(builderView) 
+		return function MainView(builderView)
 		{
 			var _core = null;
-			
-			this.init = function(core) 
-			{			
+
+			this.init = function(core)
+			{
 				_core = core;
-				
+
 				//----------------------------------------------
 				// Development - TODO to be removed for release
 				//----------------------------------------------
@@ -72,7 +72,7 @@ define(["lib-build/css!./MainView",
 				if ( app.isProduction ) {
 					require(["esri/IdentityManager", "dojo/on"], function(IdentityManager, on){
 						CommonHelper.isArcGISHosted = function(){ return true; };
-						
+
 						on(IdentityManager, 'dialog-create', function(){
 							on(IdentityManager.dialog, 'show', function(){
 								IdentityManager.dialog.txtUser_.set('value', window.configOptions.username);
@@ -84,7 +84,7 @@ define(["lib-build/css!./MainView",
 				}
 				*/
 				//----------------------------------------------
-				
+
 				// Do not allow builder under IE 10
 				if( app.isInBuilder && has("ie") && has("ie") < 10) {
 					i18n.viewer.errors.noBuilderIE = i18n.viewer.errors.noBuilderIE.replace('%VERSION%', 10).replace('%UPGRADE%', i18n.viewer.errors.upgradeBrowser);
@@ -97,7 +97,7 @@ define(["lib-build/css!./MainView",
 					_core.initError("noViewerIE");
 					return false;
 				}
-				
+
 				// Prevent iPad vertical bounce effect
 				// except on few containers that needs that
 				$(document).bind(
@@ -107,27 +107,27 @@ define(["lib-build/css!./MainView",
 							e.preventDefault();
 					}
 				);
-				
+
 				// Data Model
 				app.data = new Data();
-				
+
 				app.ui = {};
-				
+
 				app.ui.mainStage = new MainStage(
-					$("#mainStagePanel"), 
+					$("#mainStagePanel"),
 					app.isInBuilder,
 					this
 				);
-				
+
 				// Desktop UI
 				app.ui.sidePanel = new SidePanel(
-					$("#sidePanel"), 
-					app.isInBuilder, 
+					$("#sidePanel"),
+					app.isInBuilder,
 					navigateStoryToIndex
 				);
 				app.ui.floatingPanel = new FloatingPanel(
-					$("#floatingPanel"), 
-					app.isInBuilder, 
+					$("#floatingPanel"),
+					app.isInBuilder,
 					navigateStoryToIndex
 				);
 
@@ -135,28 +135,28 @@ define(["lib-build/css!./MainView",
 
 				// Mobile UI
 				app.ui.mobileView = new FloatingSwiper(
-					$("#mobileView"), 
+					$("#mobileView"),
 					app.isInBuilder,
 					navigateStoryToIndex
 				);
-				
+
 				topic.subscribe("story-navigate-section", navigateStoryToIndex);
 				topic.subscribe("story-update-sections", updateUIStory);
 				topic.subscribe("story-update-section", updateStorySection);
 				topic.subscribe("story-perform-action-media", app.ui.mainStage.updateMainMediaWithStoryAction);
-				
+
 				topic.subscribe("ADDEDIT_LOAD_WEBMAP", app.ui.mainStage.loadTmpWebmap);
 				topic.subscribe("ADDEDIT_SHOW_WEBMAP", app.ui.mainStage.showWebmapById);
 				topic.subscribe("ADDEDIT_RELOAD_CURRENT_WEBMAP", app.ui.mainStage.reloadCurrentWebmap);
-				
-				// Prevent focus on mousedown 
+
+				// Prevent focus on mousedown
 				// Focus stay allowed with keyboard with 508
 				$("body").on("mousedown", "*", function(e) {
 					if (($(this).is(":focus") || $(this).is(e.target)) && $(this).css("outline-style") == "none") {
 						$(this).css("outline", "none").on("blur", function() {
 							$(this).off("blur").css("outline", "");
 						});
-						
+
 						// Prevent outline over image-container in description panel - Unsure why needed
 						if ( $(this).parents(".image-container").length ) {
 							$(this).parents(".image-container").css("outline", "none").on("blur", function() {
@@ -193,10 +193,10 @@ define(["lib-build/css!./MainView",
 								$(this).off("blur").css("outline", "");
 							});
 						}
-						
+
 					}
 				});
-				
+
 				return true;
 			};
 
@@ -207,33 +207,33 @@ define(["lib-build/css!./MainView",
 				var enableSwitchBuilderBtn = _core.hasSwitchBuilderButton();
 				app.ui.sidePanel.toggleSwitchBuilderButton(enableSwitchBuilderBtn);
 				app.ui.floatingPanel.toggleSwitchBuilderButton(enableSwitchBuilderBtn);
-				
+
 				// If the app has been loaded but it's blank it means user come from the gallery
 				// FromScratch doesn't get here
 				// From the webmap has the webmap id
 				app.isGalleryCreation = ! Object.keys(app.data.getWebAppData().getOriginalData().values).length;
 			};
-			
+
 			this.loadFirstWebmap = function(/*webmapIdOrJSON*/)
 			{
 				//
 			};
-			
+
 			this.loadWebmapFromData = function()
 			{
-				if ( app.data.getStoryStorage() == "WEBAPP" ) 
+				if ( app.data.getStoryStorage() == "WEBAPP" )
 					storyDataReady();
 				//else
 					//on.once(app.map, 'update-end', storyDataReady);
 			};
-			
+
 			this.loadWebmap = function(webmapIdOrJSON, container, extent)
 			{
 				console.log("tpl.core.MainView - loadWebMap - webmapId:", webmapIdOrJSON);
-				
+
 				//var popup = $("body").width() > 768 ? null : new PopupMobile(null, $("<div></div>")[0]);
 				var popup = null;
-				
+
 				return arcgisUtils.createMap(webmapIdOrJSON, container, {
 					mapOptions: {
 						slider: true,
@@ -247,25 +247,25 @@ define(["lib-build/css!./MainView",
 					bingMapsKey: commonConfig.bingMapsKey,
 					editable: false,
 					layerMixins: app.data.getAppProxies()
-				}); 
+				});
 			};
-			
+
 			this.firstWebmapLoaded = function()
 			{
 				//
 			};
-			
+
 			this.startFromScratch = function()
 			{
 				initUI();
 			};
-			
+
 			this.getMapConfig = function(response, mapContainer)
 			{
 				return {
 					response: response,
 					mapCommand: new MapCommand(
-						response.map, 
+						response.map,
 						onMapCommandHomeClick,
 						_core.zoomToDeviceLocation,
 						app.data.getWebAppData().getLocateBtn()
@@ -282,27 +282,27 @@ define(["lib-build/css!./MainView",
 					)
 				};
 			};
-				
+
 			function storyDataReady()
 			{
 				var storyLength = app.data.getStoryLength(),
 					storyIndex = 0,
 					storyIndexUrl = parseInt(CommonHelper.getUrlParams().section, 10);
-				
+
 				if ( storyIndexUrl )
 					storyIndex = storyIndexUrl - 1;
-				
+
 				if ( storyIndex >= storyLength )
 					storyIndex = 0;
-				
+
 				if ( storyLength )
 					app.data.setCurrentSectionIndex(storyIndex);
-				
+
 				if ( storyLength ) {
 					// Load the panel content and the Main Stage media
 					// Will create Main Stage media containers
 					updateUIStory();
-					
+
 					// Give it's size to everyone
 					_core.handleWindowResize();
 
@@ -313,39 +313,39 @@ define(["lib-build/css!./MainView",
 					// It's a Map - wait for it to be loaded/centered
 					else {
 						var handle, handle2;
-						
+
 						handle = topic.subscribe("story-loaded-map", function(){
 							handle.remove();
 							handle2.remove();
-							
+
 							initUI();
 						});
-						
+
 						handle2 = topic.subscribe("story-section-map-timeout", function(){
 							handle.remove();
 							handle2.remove();
-							
+
 							initUI();
 						});
 					}
 				}
-				else 
+				else
 					initUI();
 			}
 
 			function initUI()
-			{				
+			{
 				// App has been configured
 				if ( ! WebApplicationData.isBlank() )
 					_core.appInitComplete();
-				// No data and in builder mode -> open the FS creation popup 
+				// No data and in builder mode -> open the FS creation popup
 				else if ( app.isInBuilder ) {
 					if( _core.isProd() )
 						builderView.showInitPopup();
 					else
 						_core.portalLogin().then(
-							builderView.showInitPopup, 
-							function(){ 
+							builderView.showInitPopup,
+							function(){
 								_core.initError("noLayerNoHostedFS");
 							}
 						);
@@ -365,7 +365,7 @@ define(["lib-build/css!./MainView",
 				else {
 					_core.initError("noLayer");
 				}
-				
+
 				if ( builderView )
 					builderView.updateUI();
 			}
@@ -388,9 +388,9 @@ define(["lib-build/css!./MainView",
 						if ( ! $("#sidePanel").parent().children().eq(0).is("#mainStagePanel") )
 							$("#sidePanel").before($("#mainStagePanel"));
 					}
-					
+
 					app.ui.sidePanel.init(
-						sections, 
+						sections,
 						app.data.getCurrentSectionIndex(),
 						layoutOpt,
 						_core.getHeaderUserCfg(),
@@ -415,50 +415,50 @@ define(["lib-build/css!./MainView",
 
 				if (has("ie") === undefined || has("ie") > 8) {
 					app.ui.mobileView.init(
-						sections, 
-						app.data.getCurrentSectionIndex(), 
-						_core.getHeaderUserCfg(), 
+						sections,
+						app.data.getCurrentSectionIndex(),
+						_core.getHeaderUserCfg(),
 						appColors
 					);
 				}
 			}
-			
+
 			// about data...
 			function updateUIStory()
 			{
 				if ( app.data.getStoryByIndex(0) )
 					document.title = $('<div>' + app.data.getStoryByIndex(0).title + '</div>').text();
-				
+
 				app.ui.mainStage.updateMainMediaContainers();
-				
+
 				initDesktopLayout();
 				initMobileLayout();
-				
+
 				setCommonLayoutColor();
 				StoryText.createMainMediaActionLink();
 				StoryText.createMediaFullScreenButton();
 				StoryText.styleSectionPanelContent();
-				
+
 				navigateStoryToIndex(app.data.getCurrentSectionIndex());
-				
+
 				if ( builderView )
 					builderView.updateUI();
 			}
-			
+
 			function updateStorySection(/*cfg*/)
 			{
 				// TODO: should only refresh the item
 				updateUIStory();
 				//navigateStoryToIndex(cfg.index);
 			}
-			
+
 			// Layout only
 			this.updateUI = function()
 			{
 				var appColors = app.data.getWebAppData().getColors(),
 					appLayout = app.data.getWebAppData().getLayoutId(),
 					appFonts = app.data.getWebAppData().getFonts();
-				
+
 				// If switching layout - builder only
 				if ( $("body").hasClass("switchLayout") ) {
 					//var classes = $.map(app.cfg.LAYOUTS, function(l){ return "layout-" + l.id; }).join(' ');
@@ -476,61 +476,61 @@ define(["lib-build/css!./MainView",
 						updateUIStory();
 					}, 50);
 				}
-				
+
 				// Add the new layout class
 				$("body").addClass("layout-" + appLayout);
 				$("body").attr("data-theme-major", appColors.themeMajor);
-				
+
 				$.each(Object.keys(app.maps), function(i, id){
 					app.maps[id].mapCommand.enableLocationButton(WebApplicationData.getLocateBtn());
 				});
-				
+
 				setCommonLayoutColor();
-				
+
 				updateDesktopLayout();
 				app.ui.mainStage.updateMainStageWithLayoutSettings();
-				
+
 				app.ui.mobileView.update(_core.getHeaderUserCfg(), appColors);
-				
+
 				/*
 				 * Fonts settings
 				 *  viewer and builder section title inline editor
 				 *  builder section content RTE happen in ViewText > postDisplay
 				 */
-				
-				// Section title 
+
+				// Section title
 				CommonHelper.addCSSRule(
-					".sectionPanel .title, .sectionPanel .appTitle, #mobileView .title, #AddEditTitleEditor { " + appFonts.sectionTitle.value + " }", 
+					".sectionPanel .title, .sectionPanel .appTitle, #mobileView .title, #AddEditTitleEditor { " + appFonts.sectionTitle.value + " }",
 					"SectionTitleFont"
 				);
 				// Section content
 				CommonHelper.addCSSRule(
-					".sectionPanel .content, #mobileView .content { " + appFonts.sectionContent.value + " }", 
+					".sectionPanel .content, #mobileView .content { " + appFonts.sectionContent.value + " }",
 					"SectionContentFont"
 				);
-				
+
 				// Strong tag need special care as the default OpenSansSemiBold use a separate font family and require "font-weight: normal"
-				
+
 				// Section title strong
 				CommonHelper.addCSSRule(
 					".sectionPanel .title strong, .sectionPanel .appTitle strong, #mobileView .title strong, #AddEditTitleEditor strong { "
-					+ (appFonts.sectionTitle.id != "default" ? 
+					+ (appFonts.sectionTitle.id != "default" ?
 							appFonts.sectionTitle.value + " font-weight: bold;"
-							: "font-family: 'open_sanssemibold', sans-serif; font-weight: normal;")
+							: "font-family: 'PT_sanssemibold', sans-serif; font-weight: normal;")
 					+ "}",
 					"SectionTitleStrongFont"
 				);
 				// Section content strong
 				CommonHelper.addCSSRule(
 					".sectionPanel .content strong, #mobileView .content strong{ "
-					+ (appFonts.sectionContent.id != "default" ? 
+					+ (appFonts.sectionContent.id != "default" ?
 							appFonts.sectionContent.value + " font-weight: bold;"
-							: "font-family: 'open_sanssemibold', sans-serif; font-weight: normal;")
+							: "font-family: 'PT_sanssemibold', sans-serif; font-weight: normal;")
 					+ "}",
 					"SectionContentStrongFont"
 				);
 			};
-			
+
 			function updateDesktopLayout()
 			{
 				var appLayout = WebApplicationData.getLayoutId(),
@@ -539,16 +539,16 @@ define(["lib-build/css!./MainView",
 
 				if ( appLayout == "side" )
 					app.ui.sidePanel.update(layoutOpt, _core.getHeaderUserCfg(), appColors);
-				else if ( appLayout == "float" ) 
+				else if ( appLayout == "float" )
 					app.ui.floatingPanel.update(layoutOpt, _core.getHeaderUserCfg(), appColors);
 			}
-			
+
 			function setCommonLayoutColor()
 			{
 				var colors = WebApplicationData.getColors();
 				CommonHelper.addCSSRule(".section a { color: " + colors.textLink + "; }");
 			}
-			
+
 			this.resize = function(cfg)
 			{
 				var appLayout = WebApplicationData.getLayoutId();
@@ -562,7 +562,7 @@ define(["lib-build/css!./MainView",
 					app.ui.sidePanel.resize(cfg);
 				else if ( appLayout == "float" )
 					app.ui.floatingPanel.resize(cfg);
-				
+
 				// Maintain the current section in all layouts
 				//  nothing will happen if the layout isn't active
 				//  TODO: can we maintain the slider activeIndex while it's not visible? (vis: hidden instead of display?)
@@ -574,19 +574,19 @@ define(["lib-build/css!./MainView",
 
 				// Style panel content (iframe sizing)
 				StoryText.styleSectionPanelContent();
-				
+
 				app.ui.mainStage.updateMainStageWithLayoutSettings();
 			};
-			
+
 			//
 			// Initialization
 			//
-			
+
 			this.checkConfigFileIsOK = function()
 			{
 				return Config.checkConfigFileIsOK();
 			};
-			
+
 			this.appInitComplete = function()
 			{
 				this.updateUI();
@@ -596,47 +596,47 @@ define(["lib-build/css!./MainView",
 					_core.displayApp();
 				topic.publish("tpl-ready");
 			};
-			
-			
-			
+
+
+
 			//
 			// Story events
 			//
-			
+
 			function navigateStoryToIndex(index)
 			{
 				console.log("tpl.core.MainView - navigateStoryToIndex - ", index);
-				
+
 				if ( index < 0 || index > app.data.getStoryLength() - 1 )
 					return;
-				
+
 				// Change current section
 				app.data.setCurrentSectionIndex(index);
-				
+
 				// Refresh Main Stage
 				app.ui.mainStage.updateMainMediaWithStoryMainMedia(index);
-				
+
 				//
 				// Refresh Story panels
 				//
-				
+
 				app.ui.sidePanel.showSectionNumber(index);
 				app.ui.floatingPanel.showSectionNumber(index);
 				app.ui.mobileView.showSectionNumber(index);
-				
+
 				$('.mediaBackContainer').hide();
 			}
-			
+
 			this.onHashChange = function()
 			{
 				var view = location.hash ? location.hash.substring(1) : "";
 				app.ui.mobileView.setView(view);
 			};
-			
+
 			//
 			// User events
 			//
-			
+
 			function onMapCommandHomeClick()
 			{
 				var currentSection = app.data.getCurrentSection(),
@@ -647,18 +647,18 @@ define(["lib-build/css!./MainView",
 
 				if ( ! currentSectionIsWebmap )
 					return;
-				
+
 				if ( currentSectionDefineExtent )
 					topic.publish("CORE_UPDATE_EXTENT", new Extent(currentSection.media.webmap.extent));
 				else
-					topic.publish("CORE_UPDATE_EXTENT", app.maps[webmapId].response.map._params.extent /*CommonHelper.getWebMapExtentFromItem(webmapItemInfo)*/);				
+					topic.publish("CORE_UPDATE_EXTENT", app.maps[webmapId].response.map._params.extent /*CommonHelper.getWebMapExtentFromItem(webmapItemInfo)*/);
 			}
-			
+
 			this.prepareMobileViewSwitch = function()
 			{
 				//
 			};
-			
+
 			this.initLocalization = function()
 			{
 				//
