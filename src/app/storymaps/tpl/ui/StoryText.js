@@ -191,6 +191,7 @@ define(["dojo/topic",
 			
 			if ( action.type == "media" ) {
 				var actionIsWebmap = action.media.type == "webmap",
+					actionChangeWebmap = currentWebmapId && actionIsWebmap && currentWebmapId != action.media.webmap.id,
 					actionChangeExtent = !! (actionIsWebmap && action.media.webmap.extent),
 					actionChangeLayers = !! (actionIsWebmap && action.media.webmap.layers),
 					actionChangePopup = !! (actionIsWebmap && action.media.webmap.popup);
@@ -259,9 +260,18 @@ define(["dojo/topic",
 					$('.mediaBackContainer').hide();
 				});
 				
-				// If the action is a popup, that will be decided later in applyPopupConfigurationStep2 
-				//  depending on the map context and the geometry of the feature
-				if ( ! actionChangePopup )
+				var isRealExtentChange = false;
+				if ( actionChangeExtent ) {
+					if ( ! currentMediaIsWebmap ) {
+						isRealExtentChange = true;
+					}
+					else {
+						isRealExtentChange = JSON.stringify(app.map.extent.toJson()) != JSON.stringify(action.media.webmap.extent);
+					}
+				}
+				
+				if ( actionChangeWebmap || ! actionIsWebmap || ! currentMediaIsWebmap 
+						|| isRealExtentChange || actionChangeLayers )
 					$('.mediaBackContainer')
 						.show()
 						.css("marginLeft", - $(".mediaBackContainer .backButton").outerWidth() / 2)
