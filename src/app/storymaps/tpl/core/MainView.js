@@ -572,16 +572,16 @@ define(["lib-build/css!./MainView",
 
 				// Strong tag need special care as the default OpenSansSemiBold use a separate font family and require "font-weight: normal"
 
-				// Section title strong
+				// Section title strong  - changed font-family for BRBC
 				CommonHelper.addCSSRule(
 					".sectionPanel .title strong, .sectionPanel .appTitle strong, #mobileView .title strong, #AddEditTitleEditor strong { "
 					+ (appFonts.sectionTitle.id != "default" ?
 							appFonts.sectionTitle.value + " font-weight: bold;"
-							: "font-family: 'PT_sanssemibold', sans-serif; font-weight: normal;")
+							: "font-family: 'Oswald', sans-serif; font-weight: normal;")
 					+ "}",
 					"SectionTitleStrongFont"
 				);
-				// Section content strong
+				// Section content strong - changed font-family for BRBC
 				CommonHelper.addCSSRule(
 					".sectionPanel .content strong, #mobileView .content strong{ "
 					+ (appFonts.sectionContent.id != "default" ?

@@ -63,9 +63,10 @@ app.cfg = {
 		}
 	],
 
+	//changed default fonts for BRBC. This is channeled through the MainView.js application of CSS.
 	FONTS: {
 		sectionTitle: [
-			{ id: "default", 	lbl: "Open Sans", 				value: "font-family:'open_sansregular', sans-serif;" },
+			{ id: "default", 	lbl: "Open Sans", 				value: "font-family:'Oswald', sans-serif;" },
 			{ id: "arial", 		lbl: "Arial", 					value: "font-family:arial,helvetica,sans-serif;" },
 			{ id: "georgia", 	lbl: "Georgia", 				value: "font-family:georgia,serif;" },
 			{ id: "lucida", 	lbl: "Lucida Sans Unicode", 	value: "font-family:lucida sans unicode,lucida grande,sans-serif;" },
@@ -75,7 +76,7 @@ app.cfg = {
 			{ id: "verdana", 	lbl: "Verdana", 				value: "font-family:verdana,geneva,sans-serif;" }
 		],
 		sectionContent: [
-			{ id: "default", 	lbl: "Open Sans", 				value: "font-family:'open_sansregular', sans-serif;" },
+			{ id: "default", 	lbl: "PT Sans", 				value: "font-family:'PT_sansregular', sans-serif;" },
 			{ id: "arial", 		lbl: "Arial", 					value: "font-family:arial,helvetica,sans-serif;" },
 			{ id: "georgia", 	lbl: "Georgia", 				value: "font-family:georgia,serif;" },
 			{ id: "lucida", 	lbl: "Lucida Sans Unicode", 	value: "font-family:lucida sans unicode,lucida grande,sans-serif;" },
@@ -154,7 +155,7 @@ app.cfg = {
 			*/
 		]
 	},
-	
+
 	// Edit those to set a custom sharing or proxy URL
 	// You have to edit those only if your webmap is deployed on Portal for ArcGIS instance and if you are not deploying the template on the Portal webserver
 	// If you are using ArcGIS Online or deploying the template on a Portal instance, you don't have to edit those URL

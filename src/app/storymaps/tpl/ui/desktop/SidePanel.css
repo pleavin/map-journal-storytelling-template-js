@@ -1,3 +1,6 @@
+/* Contains styles related to how the SidePanel is contained. Use StoryText.css to modify the contents within the SidePanel (e.g. changing the links)
+*/
+
 #sidePanel {
 	display: none;
 }
@@ -113,46 +116,6 @@ body.builder-mode .sidePanel .navSquares {
 }
 
 /*
-* Navigation Thumbnails
-*/
-.sidePanel .navThumbs {
-	display: inline-block;
-	max-width: 200px;
-	align: center;
-}
-
-.sidePanel .navIntro {
-	display: inline-block;
-	width: 100%;
-	align: center;
-}
-
-/* Goldfish colours */
-
-.sidePanel .nvTh0 {
-	background-color: #69D2E7;
-	padding: 2px;
-}
-
-.sidePanel .nvTh1 {
-	background-color: #A7DBD8;
-	padding: 2px;
-}
-.sidePanel .nvTh2 {
-	background-color: #E0E4CC;
-	padding: 2px;
-}
-.sidePanel .nvTh3 {
-	background-color: #F38630;
-	padding: 2px;
-}
-
-.sidePanel .nvTh4 {
-	background-color: #FA6900;
-	padding: 2px;
-}
-
-/*
  * Right layout
  */
 
@@ -181,17 +144,18 @@ body.layout-side-right .sidePanel .navSquares {
  * Section style
  */
 
+/* Changing the font-family here doesn't complete the job. Change needs to be made in MainView.js for bold titles, and in config.js for default fonts. */
 
 .sidePanel .title {
-	/* font-family: 'Oswald', sans-serif; */
+	/*font-family: 'Oswald', sans-serif;*/
 	/* TODO remove break compat with beta */
 	font-weight: normal;
-	font-size: 1.5em;
+	font-size: 28px;
 }
 
 .sidePanel .section:first-child .title {
 	/*display: none;*/
-	font-size: 2.3em;
+	font-size: 36px;
 	padding: 10px 0 0 0;
 }
 
@@ -201,7 +165,7 @@ body.layout-side-right .sidePanel .navSquares {
 
 .sidePanel .content {
 	margin: 20px 0;
-	font-size: 1.2em;
+	font-size: 14px;
 }
 
 .sidePanel .section:first-child .content {
