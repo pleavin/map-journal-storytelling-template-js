@@ -121,27 +121,33 @@ body.builder-mode .sidePanel .navSquares {
 	align: center;
 }
 
+.sidePanel .navIntro {
+	display: inline-block;
+	width: 100%;
+	align: center;
+}
+
 /* Goldfish colours */
 
-.sidePanel .navThumbs .nvTh0 {
+.sidePanel .nvTh0 {
 	background-color: #69D2E7;
 	padding: 2px;
 }
 
-.sidePanel .navThumbs .nvTh1 {
+.sidePanel .nvTh1 {
 	background-color: #A7DBD8;
 	padding: 2px;
 }
-.sidePanel .navThumbs .nvTh2 {
+.sidePanel .nvTh2 {
 	background-color: #E0E4CC;
 	padding: 2px;
 }
-.sidePanel .navThumbs .nvTh3 {
+.sidePanel .nvTh3 {
 	background-color: #F38630;
 	padding: 2px;
 }
 
-.sidePanel .navThumbs .nvTh4 {
+.sidePanel .nvTh4 {
 	background-color: #FA6900;
 	padding: 2px;
 }
