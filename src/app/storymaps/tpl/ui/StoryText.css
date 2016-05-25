@@ -88,6 +88,31 @@
 }
 
 /*
+* FAQs
+*/
+
+.faqWSOW {
+	font-weight: bold;
+	color: #F38630;
+}
+
+.faqWSOW:before {
+	display: inline !important;
+	vertical-align: -2px !important;
+	font-family: 'Glyphicons Halflings';
+	content: '\e080';
+}
+
+.faqWSOW.collapsed:before {
+	content: '\e080';
+}
+
+.faqWSOW:not(.collapsed):before{
+	content: '\e114';
+}
+
+
+/*
  * Inline media
  */
 

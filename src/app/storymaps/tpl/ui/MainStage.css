@@ -143,7 +143,7 @@ html.dj_ie9 .mainMediaContainer.has-error .mainStageErrorContainer {
 	display: none !important;
 }
 
-/* Getting rid of pesky next/prev buttons... */
+/* Getting rid of pesky next/prev buttons...
 
 .esriPopup .titleButton.prev {
 	right: 55px !important;
@@ -154,6 +154,7 @@ html.dj_ie9 .mainMediaContainer.has-error .mainStageErrorContainer {
 	right: 31px !important;
   display: none;
 }
+*/
 
 .esriPopup .title {
 	color: transparent;
@@ -172,7 +173,7 @@ html.dj_ie9 .mainMediaContainer.has-error .mainStageErrorContainer {
 	opacity: 1.0 !important;
 }
 
-/* Not sure why the storymap creators got rid of this. Bringing it back for making it easier to see indicator data.
+/* Re-enabled maximize button. However unclear how this will work with mobile. Also unclear on how to resize inner contents.
 
 .esriPopup .maximize {
 	display: none;
@@ -202,6 +203,7 @@ html.dj_ie9 .mainMediaContainer.has-error .mainStageErrorContainer {
 
 .esriPopup.light .contentPane {
 	color: #333333;
+  /* width: 370px; - this works, but the maximize button makes it look strange. Also - how will this reconcile with mobile? */
 }
 
 /*
