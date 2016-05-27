@@ -47,6 +47,13 @@
 	color: #3e78ad;
 }
 
+.section a[onclick] {
+	text-decoration: none;
+	color: black;
+	font-weight: normal;
+}
+
+
 /*
 * Navigation Thumbnails
 */
@@ -59,6 +66,7 @@
 .section .navIntro {
 	display: inline-block;
 	width: 100%;
+	max-width: 200px;
 	align: center;
 }
 
@@ -85,6 +93,47 @@
 .section .nvTh4 {
 	background-color: #FA6900;
 	padding: 2px;
+}
+
+/*
+* Indicators
+*/
+
+/*
+* Four item list.
+*/
+
+.indicatorList:nth-child(1) {
+	color: blue;
+}
+.indicatorList:nth-child(2) {
+	color: green;
+}
+.indicatorList:nth-child(3) {
+	color: yellow;
+}
+.indicatorList:nth-child(4) {
+	color: red;
+}
+
+.indiBlue {
+	color: blue;
+}
+
+.indiOrange{
+	color: orange;
+}
+
+.indiGreen {
+	color: green;
+}
+
+.indiPurple {
+	color: purple;
+}
+
+.indiRed {
+	color: red;
 }
 
 /*
