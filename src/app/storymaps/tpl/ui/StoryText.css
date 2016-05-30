@@ -223,6 +223,21 @@ figure figcaption {
 }
 
 /*
+* Main Stage Photos
+* Making a style so that the sourcing for the main stage photos is the same as the figure captions.
+*/
+
+.mainCaption {
+	text-align: left;
+	display: block; /* For IE8 */
+	font-size: 10px;
+	font-weight: 400;
+	color: #ADADAD;
+	margin-top: 6px;
+	font-style: italic;
+}
+
+/*
  * Image full screen V1.0
  */
 
@@ -246,9 +261,8 @@ figure figcaption {
 	display: inline-block;
 	position: absolute;
 	right: 10px;
-	width: 26px;
-	height: 26px;
-	background: url('../../../../resources/tpl/viewer/icons/media-fullscreen.png') 0 0;
+	width: 0px;
+	height: 0px;
 	opacity: 0.6;
 	margin-top: 10px;
 }
