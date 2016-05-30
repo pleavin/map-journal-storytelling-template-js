@@ -3,7 +3,7 @@ define([],
 		// Header default configuration
 		var HEADER_LOGO_URL = "resources/tpl/viewer/icons/esri-logo.png",
 			HEADER_LOGO_TARGET = "http://brbc.ab.ca",
-			HEADER_LINK_TEXT = "Web-based State of the Watershed",
+			HEADER_LINK_TEXT = "Bow River Basin Council",
 			HEADER_LINK_URL = "http://brbc.ab.ca";
 
 		app.appCfg = {
