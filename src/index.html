@@ -21,7 +21,7 @@
 
 		<!-- Facebook sharing -->
 		<meta property="og:type" content="article"/>
-		<meta property="og:title" content="Web-based State of the Watershed"/>
+		<meta property="og:title" content="State of the Watershed"/>
 		<meta property="og:description" content="The BRBC completed State of the Watershed reports in 1994 and 2005 to understand the condition and pressures in the Bow River basin. These reports were important first steps in developing strategies to improve and protect the watershed."/>
 		<meta property="og:image" content="http://brbc.ab.ca/images/stories/brbc-logo.png"/>
 
@@ -80,9 +80,71 @@
 		 			 font-family: 'Oswald', sans-serif;
 		 		 }
 
-}
+			.overlayIntro:target:before {
+  	 		display: none;
+			}
+			.overlayIntro:before {
+			  content:"";
+			  top: 0;
+			  left: 0;
+			  right: 0;
+			  bottom: 0;
+			  display: block;
+			  background: rgba(0, 0, 0, 0.6);
+			  position: fixed;
+			  z-index: 9;
+			}
+			.overlayIntro .popup {
+			  background: #fff;
+			  border-radius: 5px;
+			  width: 30%;
+			  position: fixed;
+			  top: 0;
+			  left: 35%;
+			  padding: 25px;
+			  margin: 70px auto;
+			  z-index: 10;
+			  -webkit-transition: all 0.6s ease-in-out;
+			  -moz-transition: all 0.6s ease-in-out;
+			  transition: all 0.6s ease-in-out;
+				text-align: center;
+			}
+
+			.overlayIntro:target .popup {
+			    top: -100%;
+			    left: -100%;
+			}
+
+			@media screen and (max-width: 768px){
+			  .box{
+			    width: 70%;
+			  }
+			  .overlayIntro .popup{
+			    width: 70%;
+			    left: 15%;
+			  }
+			}
 
 		</style>
+
+		<div class="mainViewSideMap sidePanel sectionPanel">
+			<div id="Welcome" class="overlayIntro">
+				<div class="popup">
+					<h2 class="title">Welcome</h2>
+					<a class="close" href="#Welcome">&times;</a>
+					<div class="content">
+							<p>This is the new home of the Bow River Basin Council's State of the Watershed.<br> <br>
+								</p>
+							<p>Additional data will be included over summer 2016. We are also currently collecting feedback on this new site so please contact us to share your thoughts!<br><br>
+								</p>
+							<p>For tips on how to use this site	please visit the FAQ section.<br><br>
+								</p>
+							<p>Thank you!</p>
+					</div>
+				</div>
+			</div>
+		</div>
+
 
 		<!-- Builder top panel is injected here -->
 		<div id="builderPanel" class="hide mainViewAboveMap"></div>

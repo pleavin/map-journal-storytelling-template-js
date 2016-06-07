@@ -53,6 +53,12 @@
 	font-weight: normal;
 }
 
+.section  a[onclick].inStory, {
+	text-decoration: none;
+	color: #3e78ad;
+	font-weight: bold;
+}
+
 /*
 * Introduction layout
 */
@@ -116,89 +122,62 @@
 * Four item list.
 */
 
-.indicatorList:nth-child(1) {
+.indicatorList:nth-child(1), .indiBlue {
 	color: blue;
 }
-.indicatorList:nth-child(2) {
+.indicatorList:nth-child(2), .indiGreen {
 	color: green;
 }
-.indicatorList:nth-child(3) {
+.indicatorList:nth-child(3), .indiYellow {
 	color: #ffcc00;
 }
-.indicatorList:nth-child(4) {
+.indicatorList:nth-child(4), .indiRed {
 	color: red;
-}
-
-.indiBlue {
-	color: blue;
 }
 
 .indiOrange{
 	color: #ff8000;
 }
 
-.indiGreen {
-	color: green;
-}
-
 .indiPurple {
 	color: purple;
 }
 
-.indiRed {
-	color: red;
+/*
+* Drop downs
+*/
+
+.wildlifeWSOW, .faqWSOW {
+	font-weight: normal;
+	font-size: 14px;
+	color: black !important;
+}
+
+.faqWSOW.collapsed:before, .wildlifeWSOW.collapsed:before {
+	font-family: 'Glyphicons Halflings';
+	content: '\e080';
+}
+
+.faqWSOW:not(.collapsed):before, .wildlifeWSOW:not(.collapsed):before{
+	font-family: 'Glyphicons Halflings';
+	content: '\e114';
 }
 
 /*
-* Wildlife
+* Specializing the colours
 */
 
-.wildlifeWSOW {
-	font-weight: bold;
-	color: black !important;
+.faqWSOW:before {
+	display: inline !important;
+	vertical-align: -2px !important;
+	color: #F38630 !important;
 }
 
 .wildlifeWSOW:before {
 	display: inline !important;
 	vertical-align: -2px !important;
 	color: #69D2E7 !important;
-	font-family: 'Glyphicons Halflings';
-	content: '\e080';
 }
-
-.wildlifeWSOW.collapsed:before {
-	content: '\e080';
-}
-
-.wildlifeWSOW:not(.collapsed):before{
-	content: '\e114';
-}
-
-/*
-* FAQs
-*/
-
-.faqWSOW {
-	font-weight: normal;
-	color: #black !important;
-}
-
-.faqWSOW:before {
-	display: inline !important;
-	vertical-align: -2px !important;
-	color: #F38630 !important;
-	font-family: 'Glyphicons Halflings';
-	content: '\e080';
-}
-
-.faqWSOW.collapsed:before {
-	content: '\e080';
-}
-
-.faqWSOW:not(.collapsed):before{
-	content: '\e114';
-}
-
 
 /*
  * Inline media
