@@ -123,6 +123,10 @@ html.dj_ie9 .mainMediaContainer.has-error .mainStageErrorContainer {
  /* Overriding popup size constraints to fit indicator graphs.
  * Last modified on March 29th 2016.
  */
+ /*
+ .esriPopupWrapper {
+   width: 370px;
+ }
 
  .esriPopup .sizer {
    width: 370px;
@@ -137,6 +141,7 @@ html.dj_ie9 .mainMediaContainer.has-error .mainStageErrorContainer {
  height: 300px;
  padding-top: 5px;
  }
+ */
 
 /*.mapContainer .esriPopup .actionList {*/
 .esriPopup .actionsPane {

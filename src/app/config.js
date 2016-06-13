@@ -120,7 +120,7 @@ app.cfg = {
 	//
 
 	// Text to be used as the browser page title during app creation
-	TPL_NAME: "Web-based State of the Watershed",
+	TPL_NAME: "State of the Watershed",
 	TPL_ID: "wsowmapjournal",
 	WEBAPP_TAG: ["Story Map", "Map Journal"],
 	WEBAPP_KEYWORD_GENERIC: ["JavaScript", "Map", "Mapping Site", "Online Map", "Watershed"],
