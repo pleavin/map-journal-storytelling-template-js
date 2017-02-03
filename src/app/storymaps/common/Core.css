@@ -23,8 +23,9 @@ html, body {
 }
 
 @font-face {
+<<<<<<< HEAD
 	font-family: 'Oswald';
-	src: url('_resources/font/Oswald-Regular.ttf');
+	src: url('_resources/font/Oswald-Regular.ttf') format('truetype');
 	font-weight: normal;
 	font-style: normal;
 }
@@ -215,4 +216,29 @@ input[type="checkbox"] {
 
 .claro .dijitTooltip {
 	box-sizing: initial;
+}
+
+/*
+ * Print instruction
+ */
+
+.print-warning {
+	display: none;
+	margin: 20px auto;
+	padding: 10px;
+	background-color: #CCC;
+	color: #000;
+	border-radius: 2px;
+	font-size: 20px;
+	text-align: center;
+}
+
+@media print {
+	body > * {
+		display: none;
+	}
+
+	.print-warning {
+		display: block;
+	}
 }

@@ -109,6 +109,7 @@ html.dj_ie9 .mainMediaContainer.has-error .mainStageErrorContainer {
     height:100%;
     width:100% !important;
     overflow:hidden;
+    background-color: #FFF;
 }
 
 .mapContainer.legend {

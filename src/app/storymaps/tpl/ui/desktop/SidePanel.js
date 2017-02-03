@@ -40,6 +40,7 @@ define(["lib-build/tpl!./SidePanelSection",
 				render(sections, sectionIndex);
 				initEvents();
 
+
 				_navSquares.init({
 					sections: sections,
 					sectionIndex: sectionIndex,
@@ -49,6 +50,9 @@ define(["lib-build/tpl!./SidePanelSection",
 					dotColor: colors.softBtn,
 					tooltipPosition: layoutOptions.layoutCfg.position == "left" ? "right" : "left"
 				});
+
+
+				container.find('.sections .shareIcon').toggleClass('active', layoutOptions.socialLinks);
 
 				// Visual scroll invitation in viewer
 				if ( ! isInBuilder ) {
@@ -140,6 +144,7 @@ define(["lib-build/tpl!./SidePanelSection",
 					if(index === 0) {
 					_navSquares.setActive(index);
 				}
+
 
 					if ( ! skipScrolling ) {
 						// Start from scratch
@@ -253,14 +258,14 @@ define(["lib-build/tpl!./SidePanelSection",
 				$.each(sections, function(i, section){
 					contentHTML += createSectionBlock(
 						i,
-						section["status"],
-						section["content"],
-						section["title"],
-						section["OBJECTID"]
+						section.status,
+						section.content,
+						section.title,
+						section.OBJECTID
 					);
 				});
 
-				container.find('.appTitle').html(sections.length ? sections[0]["title"] : '');
+				container.find('.appTitle').html(sections.length ? sections[0].title : '');
 				container.find('.sections').html(StoryText.prepareSectionPanelContent(contentHTML));
 				container.find('.section')
 					.click(onClickSection)
@@ -533,13 +538,16 @@ define(["lib-build/tpl!./SidePanelSection",
 
 			function setColor(colors)
 			{
+
 				_navSquares.update({
 					bgColor: colors.dotNav,
 					tooltipBgColor: colors.text,
 					tooltipFontColor: colors.panel
 				});
 				container.css("background-color", colors.panel);
-				container.find('.scroll').css("background-color", colors.panel);
+				container.find('.scroll').css({
+					'background': 'linear-gradient(transparent, ' + colors.panel + ')'
+				});
 				container.find('.sections').css("color", colors.text);
 				container.find('.panelEditBtn').css("background-color", colors.panel);
 

@@ -62,7 +62,7 @@ define(["lib-build/tpl!./ViewTheme",
 					$.each(themes, function(index, theme){
 						// This doesn't use the theme name as it would break compat with story done prior 06/26/14
 						// But ultimately it should, they would default to the first theme
-						if ( selectedThemeCfg.dotNav == theme.dotNav && selectedThemeCfg.panel == theme.panel 
+						if ( selectedThemeCfg.dotNav == theme.dotNav && selectedThemeCfg.panel == theme.panel
 								&& selectedThemeCfg.media == theme.media && selectedThemeCfg.text == theme.text)
 							selectedTheme = index;
 					});

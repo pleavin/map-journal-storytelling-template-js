@@ -16,7 +16,9 @@
 			To correctly reference your Map Journal in search engine:
 			 - create and fill out extensively an ArcGIS Online item that link to your final application
 			 - edit the following four tags as well as the title tag above on line 4
+			 - see https://developerscorner.storymaps.arcgis.com/grow-your-story-maps-audience-with-open-graph-tags-b7639cb65d5c
 		-->
+
 		<meta name="description" content="Understand watershed conditions and health, land and water use, risks and actions, and how natural features influence the Bow River Basin.">
 
 		<!-- Facebook sharing -->
@@ -38,6 +40,7 @@
 			var configOptions = {
 				// Enter an application ID created through the Map Journal builder
 				appid: "0b0815b9007343e1868452eb3b268fbc",
+
 				// Optionally to secure Journal's access, use an OAuth application ID (example: 6gyOg377fLUhUk6f)
 				// User will need to sign-in to access the viewer even if your application is public
 				oAuthAppId: "",
@@ -67,8 +70,8 @@
 
 		<script type="text/javascript">
 			var app = {
-				version: '1.7.1',
-				pathJSAPI: '//js.arcgis.com/3.16/'
+				version: '1.9.1',
+				pathJSAPI: '//js.arcgis.com/3.19/'
 			};
 		</script>
 
@@ -126,25 +129,6 @@
 			}
 
 		</style>
-
-		<div class="mainViewSideMap sidePanel sectionPanel">
-			<div id="Welcome" class="overlayIntro">
-				<div class="popup">
-					<h2 class="title">Welcome</h2>
-					<a class="close" href="#Welcome">&times;</a>
-					<div class="content">
-							<p>This is the new home of the Bow River Basin Council's State of the Watershed.<br> <br>
-								</p>
-							<p>Additional data will be included over summer 2016. We are also currently collecting feedback on this new site so please contact us to share your thoughts!<br><br>
-								</p>
-							<p>For tips on how to use this site	please visit the FAQ section.<br><br>
-								</p>
-							<p>Thank you!</p>
-					</div>
-				</div>
-			</div>
-		</div>
-
 
 		<!-- Builder top panel is injected here -->
 		<div id="builderPanel" class="hide mainViewAboveMap"></div>
@@ -403,21 +387,8 @@
 			</table>
 		</div>
 
+		<div class="print-warning"></div>
+
 		<script type="text/javascript" src="app/main-config.js"></script>
-		<script type="text/javascript">
-
-		require(["dojo/topic"], function(topic) {
-			/*
-			 * Custom Javascript to be executed while the application is initializing goes here
-			 */
-
-				// The application is ready
-				topic.subscribe("tpl-ready", function(){
-					/*
-					 * Custom Javascript to be executed when the application is ready goes here
-					 */
-		});
-	});
-</script>
-</body>
+	</body>
 </html>

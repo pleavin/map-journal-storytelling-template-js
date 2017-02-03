@@ -9,7 +9,7 @@ define([
 		return function SquareNavBar(container, navigationCallback)
 		{
 			var _this = this,
-				_params = null,
+        _params = null,
 				_nbSections = null;
 
 			this.init = function(params)
@@ -28,6 +28,8 @@ define([
 
 			this.setActive = function(index)
 			{
+        /* container.find(".navDotsNav").toggle(!! _nbSections);  -- Not sure if this was added in merge to DotNav. Hanging onto in case things break*/
+
 				if ( ! _nbSections )
 					return;
 
@@ -55,7 +57,7 @@ define([
 				_params.tooltipBgColor = params.tooltipBgColor || _params.tooltipBgColor;
 				_params.tooltipFontColor = params.tooltipFontColor || _params.tooltipFontColor;
 				_params.dotColor = params.dotColor || _params.dotColor;
-
+        _params.activeColor = params.activeColor;
 				setColor();
 			};
 
@@ -88,6 +90,7 @@ define([
 				for(var i=0; i < 5; i++){
           k = menuItems.pop();
 					var title = $("<div>" + _params.sections[k].title + "</div>").text();
+          title = title.replace(/"/g, '&quot;');
 					squareHTML += '<div class="square" title="' + title + '" data-index="' + k + '">&#32;</div>';
 				}
 

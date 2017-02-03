@@ -57,7 +57,7 @@ define([
 				_params.tooltipBgColor = params.tooltipBgColor || _params.tooltipBgColor;
 				_params.tooltipFontColor = params.tooltipFontColor || _params.tooltipFontColor;
 				_params.dotColor = params.dotColor || _params.dotColor;
-
+				_params.activeColor = params.activeColor;
 				setColor();
 			};
 
@@ -90,6 +90,7 @@ define([
 
 				for(var i=startIndex; i < _nbSections && i < startIndex + _groupSize; i++){
 					var title = $("<div>" + _params.sections[i].title + "</div>").text();
+					title = title.replace(/"/g, '&quot;');
 
 					if ( i === 0 )
 						dotsHTML += '<div class="dot glyphicon glyphicon-home" title="' + title + '" data-index="0"></div>';
@@ -137,7 +138,8 @@ define([
 
 				container.find('.dot').tooltip({
 					placement: _params.tooltipPosition,
-					trigger: 'hover'
+					trigger: 'hover',
+					html: true
 				});
 
 				setColor();
@@ -156,6 +158,16 @@ define([
 					CommonHelper.addCSSRule(".navDots .tooltip-arrow { border-top-color: " + _params.tooltipBgColor + " !important; border-bottom-color: " + _params.tooltipBgColor + " !important; }");
 				else
 					CommonHelper.addCSSRule(".navDots .tooltip-arrow { border-left-color: " + _params.tooltipBgColor + " !important; border-right-color: " + _params.tooltipBgColor + " !important; }");
+
+				// Active color
+				if (_params.activeColor) {
+					CommonHelper.addCSSRule(".navDots .dot.active, .navDots .dot:hover { color: " + _params.activeColor + " !important; }", "dotNavActiveColor");
+				}
+				else {
+					$('#dotNavActiveColor').remove();
+				}
+
+				container.toggleClass('theme-black', _params.bgColor == '#FFFFFF');
 			}
 
 			function initEvents()

@@ -61,8 +61,12 @@ define(["lib-build/tpl!./FloatingPanelSection",
 					tooltipBgColor: colors.text,
 					tooltipFontColor: colors.panel,
 					dotColor: colors.softBtn,
+					activeColor: colors.dotNavActive || '',
 					tooltipPosition: layoutOptions.layoutCfg.position == "left" ? "right" : "left"
 				});
+
+
+				container.find('.sections .shareIcon').toggleClass('active', layoutOptions.socialLinks);
 
 				// Visual scroll invitation in viewer
 				if ( ! isInBuilder ) {
@@ -74,6 +78,7 @@ define(["lib-build/tpl!./FloatingPanelSection",
 						container.find(".navDots").hide();
 						container.find('.sections').css(layoutOptions.layoutCfg.position == "left" ? "padding-left" : "padding-right", "3%");
 					}
+
 					if ( app.userCanEdit && has("ie") != 9 && ! CommonHelper.getUrlParams().preview ) {
 						container.find('.error-status').addClass('enabled');
 						topic.subscribe("MYSTORIES_SCAN", updateErrorStatus);
@@ -346,6 +351,7 @@ define(["lib-build/tpl!./FloatingPanelSection",
 				var shareURL = SocialSharing.cleanURL(document.location.href, true);
 				shareURL += shareURL.match(/\?/) ? '&' : '?';
 				shareURL += "section=" + (index+1);
+
 				return viewSectionTpl({
 					optHtmlClass: optHtmlClass,
 					title: StoryText.prepareEditorContent(title),
@@ -432,10 +438,17 @@ define(["lib-build/tpl!./FloatingPanelSection",
 				_navDots.update({
 					bgColor: colors.dotNav,
 					tooltipBgColor: colors.text,
-					tooltipFontColor: colors.panel
+
+					tooltipFontColor: colors.panel,
+					activeColor: colors.dotNavActive || ''
 				});
 				container.find('.backdrop, .panelEditBtn').css("background-color", colors.panel);
 				container.css("color", colors.text);
+				container.find('.backdrop').css("opacity", colors.panelOpa || '');
+				container.find('.scroll').css({
+					'background': 'linear-gradient(transparent, ' + colors.panel + ')'
+				});
+
 			}
 
 			function displayScrollInvite(colors, startOnLastSection)
@@ -467,12 +480,14 @@ define(["lib-build/tpl!./FloatingPanelSection",
 
 			function updateSwiperWrapperForScrollInvite()
 			{
+				/*
 				var swiperWrapperHeight = container.find('.swiper-container').height();
 
 				container.find('.swiper-wrapper').css({
 					height: container.find('.swiper-slide-active').position().top + swiperWrapperHeight - container.find('.scroll').outerHeight(),
 					overflow: 'hidden'
 				});
+				*/
 			}
 
 			function removeScrollInvite()

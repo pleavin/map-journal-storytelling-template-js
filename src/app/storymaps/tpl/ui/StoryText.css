@@ -179,6 +179,18 @@
 	color: #69D2E7 !important;
 }
 
+a[data-storymaps].navigate-error {
+	border-bottom: 1px dashed red;
+	color: red;
+}
+
+a[data-storymaps].navigate-error-silent {
+	border-bottom: none;
+	cursor: default;
+	color: inherit;
+	font-weight: normal;
+}
+
 /*
  * Inline media
  */

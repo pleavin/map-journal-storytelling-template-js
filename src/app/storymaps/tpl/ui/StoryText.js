@@ -3,9 +3,11 @@ define(["dojo/topic",
 		"esri/graphic",
 		"esri/geometry/Point",
 		"esri/geometry/ScreenPoint",
+		"esri/geometry/Extent",
 		"esri/symbols/PictureMarkerSymbol",
-        "lib-app/colorbox/jquery.colorbox",
-        "lib-build/css!lib-app/colorbox/colorbox"
+		"storymaps/tpl/core/Helper",
+    "lib-app/colorbox/jquery.colorbox",
+    "lib-build/css!lib-app/colorbox/colorbox"
     ],
 	function(
 		topic,
@@ -13,7 +15,9 @@ define(["dojo/topic",
 		Graphic,
 		Point,
 		ScreenPoint,
-		PictureMarkerSymbol
+		Extent,
+		PictureMarkerSymbol //,
+		// Helper // TODO: SIZES. probably need tokens.
 	){
 		var _fullScreenMediaIsOpening = false;
 
@@ -109,9 +113,38 @@ define(["dojo/topic",
 		function createMainMediaActionLink()
 		{
 			$.each(app.data.getContentActions(), function(i, action){
-				$("a[data-storymaps=" + action.id + "]").off('click').click(function(){
-					performAction(action);
-				});
+				var link = $("a[data-storymaps=" + action.id + "]"),
+					validAction = true;
+
+				if (action.type == 'navigate' && (action.index == -1 || action.hiddenSection)) {
+					validAction = false;
+
+					// In builder and viewer if owner - style the navigate link that point to invalid section differently
+					// In viewer when not owner, just disable the link
+					var errorClass = app.userCanEdit ? 'navigate-error' : 'navigate-error-silent';
+					link.addClass(errorClass);
+
+					if (app.userCanEdit) {
+						var label = i18n.viewer.mainStage.errorDeleted;
+
+						if (action.hiddenSection && action.index != -1) {
+							label = i18n.viewer.mainStage.errorNotPublished;
+						}
+
+						link.tooltip({
+							trigger: 'hover',
+							placement: 'top',
+							container: 'body',
+							title: label
+						});
+					}
+				}
+
+				if (validAction) {
+					$("a[data-storymaps=" + action.id + "]").off('click').click(function(){
+						performAction(action);
+					});
+				}
 			});
 			$("#mainStagePanel").find(".backLbl").html(i18n.viewer.mainStage.back);
 		}
@@ -131,10 +164,15 @@ define(["dojo/topic",
 
 			_fullScreenMediaIsOpening = true;
 
+			// this already has a token on it, since it's already being displayed in the side panel
+			var fullscreenHref = imgNode.attr('src');
+
+			// TODO: SIZES
+
 			$.colorbox({
-				href: imgNode.attr('src'),
+				href: fullscreenHref,
 				photo: true,
-				title: imgNode.parents('figure').find('figcaption').html() || imgNode.attr('title'),
+				title: imgNode.closest('figure').find('figcaption').html() || imgNode.attr('title'),
 				scalePhotos: true,
 				maxWidth: '90%',
 				maxHeight: '90%'
@@ -144,7 +182,7 @@ define(["dojo/topic",
 				_fullScreenMediaIsOpening = false;
 			}, 800);
 		}
-		
+
 		function createMediaFullScreenButton() // TODO: container? common method with actionLink?
 		{
 			$(".sections img").each(function(i, node){
@@ -189,7 +227,17 @@ define(["dojo/topic",
 
 			$('.mediaBackContainer').hide();
 
-			if ( action.type == "media" ) {
+			var locLayer = app.map && app.map.getLayer("MJActionsLocate");
+			if (locLayer) {
+				app.map.removeLayer(locLayer);
+			}
+
+			if ( action.type == "navigate" ) {
+				if (action.index !== undefined) {
+					topic.publish('story-navigate-section', action.index);
+				}
+			}
+			else if ( action.type == "media" ) {
 				var actionIsWebmap = action.media.type == "webmap",
 					actionChangeWebmap = currentWebmapId && actionIsWebmap && currentWebmapId != action.media.webmap.id,
 					actionChangeExtent = !! (actionIsWebmap && action.media.webmap.extent),
@@ -203,6 +251,7 @@ define(["dojo/topic",
 				//  on the extent. As of 3.11, zoom far away is ok, but simple pan fire multiple events.
 				//  so wait for story-loaded-map which is fired on setExtent.then and after a timeout we can
 				//  safely listen for update-end
+				/*
 				if ( actionChangeExtent && ! actionChangeLayers && ! actionChangePopup && currentWebmapId == action.media.webmap.id ) {
 					var handle = topic.subscribe("story-loaded-map", function(){
 						handle.remove();
@@ -219,6 +268,7 @@ define(["dojo/topic",
 						}, 800);
 					});
 				}
+				*/
 
 				$('.backButton').off('click').click(function() {
 					// Was on a webmap and action is not a webmap or different webmap
@@ -228,11 +278,12 @@ define(["dojo/topic",
 					// Was on a webmap anc action is the same webmap
 					// Manually restore the state
 					else if ( currentMediaIsWebmap && actionIsWebmap && currentWebmapId == action.media.webmap.id ) {
-						// If action define extent: Reset to the extent prior clicking the action (not the section default)
-						if ( actionChangeExtent || actionChangePopup )
-							app.map.setExtent(currentExtent).then(function(){
-								app.map.infoWindow.reposition();
-							});
+						var currentSectionDefineExtent = !! (currentMediaIsWebmap ? currentMedia.webmap.extent : null),
+							resetExtent = currentSectionDefineExtent ? new Extent(currentMedia.webmap.extent) : app.maps[currentWebmapId].response.map._params.extent;
+
+						app.map.setExtent(resetExtent || currentExtent).then(function(){
+							app.map.infoWindow.reposition();
+						});
 
 						if ( actionChangePopup )
 							app.map.infoWindow.hide();
@@ -285,17 +336,24 @@ define(["dojo/topic",
 
 				// Add a marker
 				if ( action.zoom.mapMarker ) {
-					pointLayer = new GraphicsLayer();
+					pointLayer = app.map.getLayer("MJActionsLocate");
+
+					if (! pointLayer) {
+						pointLayer = new GraphicsLayer({
+							id: "MJActionsLocate"
+						});
+						app.map.addLayer(pointLayer);
+					}
+
 					pointLayer.add(
 						new Graphic(
 							new Point(action.zoom.center),
 							new PictureMarkerSymbol(app.cfg.SECTION_ACTION_ZOOM_MAP_MARKER, 32, 32) // TODO should also be configurable
 						)
 					);
-					app.map.addLayer(pointLayer);
 				}
 
-				app.map.centerAndZoom(action.zoom.center, action.zoom.level).then(function(){
+				app.map.centerAndZoom(action.zoom.center, app.map.getLevel() != action.zoom.level ? action.zoom.level : null).then(function(){
 					if ( $("body").hasClass("layout-float") ) {
 						var graphicToScreen = app.map.toScreen(pointLayer.graphics[0].geometry),
 							compareMeasure = null,
@@ -332,9 +390,15 @@ define(["dojo/topic",
 					.css("marginRight", - $(".mediaBackContainer .backButton").outerWidth() / 2);
 
 				$('.backButton').off('click').click(function() {
-					app.map.setExtent(currentExtent);
+
 					if ( pointLayer )
 						app.map.removeLayer(pointLayer);
+
+					var currentSectionDefineExtent = !! (currentMediaIsWebmap ? currentMedia.webmap.extent : null),
+					resetExtent = currentSectionDefineExtent ? new Extent(currentMedia.webmap.extent) : app.maps[currentWebmapId].response.map._params.extent;
+
+					app.map.setExtent(resetExtent || currentExtent);
+
 					$('.mediaBackContainer').hide();
 				});
 			}

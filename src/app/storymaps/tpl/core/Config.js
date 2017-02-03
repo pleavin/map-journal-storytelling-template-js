@@ -246,7 +246,6 @@ define([],
 
 					&& app.cfg.AUTHORIZED_IMPORT_SOURCE
 					&& app.cfg.FLICKR_API_KEY
-					&& app.cfg.FACEBOOK_APP_ID
 					&& app.cfg.YOUTUBE_DISABLE_ON_PORTAL !== undefined
 					&& app.cfg.YOUTUBE_API_KEY
 

@@ -115,6 +115,8 @@ define(["lib-build/css!./MainView",
 
 				app.ui = {};
 
+				app.ui.mainView = this;
+
 				app.ui.mainStage = new MainStage(
 					$("#mainStagePanel"),
 					app.isInBuilder,
@@ -341,6 +343,9 @@ define(["lib-build/css!./MainView",
 				var storyLength = app.data.getStoryLength(),
 					storyIndex = 0,
 					storyIndexUrl = parseInt(CommonHelper.getUrlParams().section, 10);
+
+				// Cleanup
+				app.data.cleanSectionsNarrativeMarkup();
 
 				if ( storyIndexUrl )
 					storyIndex = storyIndexUrl - 1;
@@ -571,25 +576,38 @@ define(["lib-build/css!./MainView",
 				);
 
 				// Strong tag need special care as the default OpenSansSemiBold use a separate font family and require "font-weight: normal"
+				// ALS: took off <strong> tag in title construction since we wanted the first title bigger but not bold
+				// but duplicated <strong> here to target existing apps
+				//
 
-				// Section title strong  - changed font-family for BRBC
-				CommonHelper.addCSSRule(
-					".sectionPanel .title strong, .sectionPanel .appTitle strong, #mobileView .title strong, #AddEditTitleEditor strong { "
-					+ (appFonts.sectionTitle.id != "default" ?
-							appFonts.sectionTitle.value + " font-weight: bold;"
-							: "font-family: 'Oswald', sans-serif; font-weight: normal;")
-					+ "}",
-					"SectionTitleStrongFont"
-				);
+				// Section title strong - changed font-family for BRBC
+				var titleFontRules = '.sectionPanel .title, #mobileView .title, #AddEditTitleEditor, ' +
+														'.sectionPanel .title strong, #mobileView .title strong, #AddEditTitleEditor strong { ';
+				var firstTitleFontRules = '.sectionPanel .section:first-child .title, ' +
+																	'.sectionPanel .section:first-child .title strong { ';
+				if (appFonts.sectionTitle.id === 'default') {
+					titleFontRules += 'font-family: \'Oswald\', sans-serif;';
+					firstTitleFontRules += 'font-family: \'Oswald\', sans-serif; }';
+				} else {
+					titleFontRules += appFonts.sectionTitle.value;
+					firstTitleFontRules += appFonts.sectionTitle.value + ' }';
+				}
+				titleFontRules += ' font-weight: bold; }';
+
+				CommonHelper.addCSSRule(titleFontRules, 'SectionTitleStrongFont');
+				CommonHelper.addCSSRule(firstTitleFontRules, 'FirstSectionTitleFont');
+
 				// Section content strong - changed font-family for BRBC
-				CommonHelper.addCSSRule(
-					".sectionPanel .content strong, #mobileView .content strong{ "
-					+ (appFonts.sectionContent.id != "default" ?
-							appFonts.sectionContent.value + " font-weight: bold;"
-							: "font-family: 'PT_sanssemibold', sans-serif; font-weight: normal;")
-					+ "}",
-					"SectionContentStrongFont"
-				);
+				var sectionFontRules = '.sectionPanel .content strong, #mobileView .content strong { ';
+				if (appFonts.sectionContent.id === 'default') {
+					sectionFontRules += 'font-family: \'PT_sanssemibold\', sans-serif;';
+				} else {
+					sectionFontRules += appFonts.sectionContent.value;
+				}
+				sectionFontRules += ' font-weight: bold; }';
+
+				CommonHelper.addCSSRule(sectionFontRules, 'SectionContentStrongFont');
+
 			};
 
 			function updateDesktopLayout()
@@ -681,6 +699,8 @@ define(["lib-build/css!./MainView",
 
 				if ( index < 0 || index > app.data.getStoryLength() - 1 )
 					return;
+
+				app.ui.mainStage.beforeMainMediaUpdate(app.data.getCurrentSectionIndex());
 
 				// Change current section
 				app.data.setCurrentSectionIndex(index);
